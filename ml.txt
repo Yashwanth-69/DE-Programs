@@ -1,0 +1,73 @@
+
+import pandas as pd
+DF['Label'] =DF['Label'].replace(['BENIGN', 'WebDDoS', 'DrDoS_DNS', 'DrDoS_LDAP', 'DrDoS_MSSQL',
+       'DrDoS_NetBIOS', 'DrDoS_NTP', 'DrDoS_SNMP', 'DrDoS_SSDP',
+       'DrDoS_UDP', 'Syn', 'TFTP', 'UDP-lag'],[0, 1, 1, 1, 1,1, 1, 1, 1,1, 1, 1, 1])
+DF.info()
+X = DF.iloc[:,:-1]
+X
+ST=[]
+for i in X.columns:
+    #print(X[i].std())
+    if X[i].std() == 0:
+        #print(i)
+        ST.append(i)
+X=X.drop(ST,axis=1)
+X = (X-X.min())/(X.max()-X.min())
+X
+y = DF.iloc[:,-1:]
+y = y.astype('int')
+y
+ST=[]
+for i in X.columns:
+    #print(X[i].std())
+    if X[i].std() == 0:
+        #print(i)
+from sklearn.tree import DecisionTreeClassifier
+DT = DecisionTreeClassifier()
+model = DT.fit(X,y)
+model
+Test = pd.read_csv('CICDDoS2019_87F_TESTING_DATASET_FRONT_SEQUANTIAL_MULTI_Replace.csv')
+Test['Label'] =Test['Label'].replace(['BENIGN', 'UDPLag', 'NetBIOS', 'LDAP', 'MSSQL', 'Portmap', 'Syn',
+X_test = Test.iloc[:,:-1]
+X_test = X_test[X.columns]
+X
+y_test = Test.iloc[:,-1:]
+y
+Test['Label'].unique()
+Test['Label'].unique()
+Test['Label'].unique()_test = y_test.astype('int')
+y_test
+y_test = Test.iloc[:,-1:]
+y
+print(type(y_test), type(Prediction))
+print(set(y_test), set(Prediction))
+print(y_test)_test = y_test.astype('int')
+y
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+cm = confusion_matrix(y_test, Prediction, labels=DT.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=DT.classes_)
+disp.plot()
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, auc
+cm = confusion_matrix(y_test, Prediction, labels=DT.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=DT.classes_)
+disp.plot()
+_test_test = (X_test - X_test.min())/(X_test.max() - X_test.min())
+X_test      'UDP'],[0, 1, 1, 1, 1, 1, 1, 1])
+Testodel = DT.fit(X,y)
+model
+from sklearn.tree import DecisionTreeClassifier
+DT = DecisionTreeClassifier()
+from sklearn.tree import DecisionTreeClassifier
+DT = DecisionTreeClassifier()
+ST.append(i)
+X=X.drop(ST,axis=1)
+X = (X-X.min())/(X.max()-X.min())
+X

@@ -8,33 +8,34 @@ import org.apache.hadoop.mapreduce.Mapper;
 public class MaxTempMapper
 extends Mapper<LongWritable, Text, Text, IntWritable> {
 
-    public void map(LongWritable key, Text value,
+    public void map(LongWritable key,
+                    Text value,
                     Context context)
             throws IOException, InterruptedException {
 
-        String line = value.toString();
+        String line = value.toString().trim();
 
         if(line.length() > 92) {
 
             String year = line.substring(15, 19);
 
-            int airtemp;
+            String tempString;
 
             if(line.charAt(87) == '+') {
 
-                airtemp =
-                    Integer.parseInt(line.substring(88, 92));
+                tempString = line.substring(88, 92);
 
             } else {
 
-                airtemp =
-                    Integer.parseInt(line.substring(87, 92));
+                tempString = line.substring(87, 92);
             }
 
-            String q = line.substring(92, 93);
+            int airtemp = Integer.parseInt(tempString);
+
+            String quality = line.substring(92, 93);
 
             if(airtemp != 9999 &&
-                    q.matches("[01459]")) {
+                    quality.matches("[01459]")) {
 
                 context.write(
                         new Text(year),
